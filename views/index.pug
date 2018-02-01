@@ -1,0 +1,29 @@
+extends layout
+block head
+	title Bode diagrams
+	script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+	script(src="/socket.io/socket.io.js")
+	script(src="/javascripts/main.js")
+	script(type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML")
+block content
+	div#content
+		center
+			div#help
+				p(style="color:gray;font-style:italic;text-align:left;") #help
+				p If \(G(s) = {10(s+2)^2 \over s(s^2+0.1s+0.01)} = {1000(s+2)^2 \over s(100s^2+10s+1)} = {1000s^2+4000s+4000 \over 100s^3+10s^2+s}\) the input has to be \([1000, 4000, 4000] \over [100, 10, 1, 0]\)
+			table#input
+				tr
+					td Numerator:
+					td
+						input#num(type="text" value="[1000,4000,4000]")
+				tr
+					td(style="padding:0px;")
+					td#sep
+				tr
+					td Denominator:
+					td
+						input#den(type="text" value="[100,10,1,0]")
+				tr
+					th(colspan=2)
+						button#go Go!
+			div#diagram
