@@ -10,19 +10,19 @@ block content
 		center
 			div#help
 				p(style="color:gray;font-style:italic;text-align:left;") #help
-				p If \(G(s) = {10(s+2)^2 \over s(s^2+0.1s+0.01)} = {1000(s+2)^2 \over s(100s^2+10s+1)} = {1000s^2+4000s+4000 \over 100s^3+10s^2+s}\) the input has to be \([1000, 4000, 4000] \over [100, 10, 1, 0]\)
+				p If \(G(s) = {10(s+2)^2 \over s(s^2+0.1s+0.01)} = {10s^2+40s+40 \over s^3+0.1s^2+0.01s}\) the input has to be \([10, 40, 40] \over [1, 0.1, 0.01, 0]\)
 			table#input
 				tr
 					td Numerator:
 					td
-						input#num(type="text" value="[1000,4000,4000]")
+						input#num(type="text" value="[10,40,40]")
 				tr
 					td(style="padding:0px;")
 					td#sep
 				tr
 					td Denominator:
 					td
-						input#den(type="text" value="[100,10,1,0]")
+						input#den(type="text" value="[1,0.1,0.01,0]")
 				tr
 					th(colspan=2)
 						button#go Go!

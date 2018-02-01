@@ -1,4 +1,6 @@
 $(function(){
+	var n = [];
+	var d = []
 	var socket = io();
 	socket.on("response",function(data){
 		$("#diagram").html(data);
@@ -6,6 +8,8 @@ $(function(){
 	$("#go").click(function(){
 		let num = $("#num").val();
 		let den = $("#den").val();
+		n = num;
+		d = den;
 		if (num && den){
 			let data = {
 				n:JSON.parse(num),
