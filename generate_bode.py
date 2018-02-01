@@ -33,7 +33,7 @@ def main():
     if not os.path.exists(DP+i):
       os.makedirs(DP+i)
     s1 = signal.lti(n,d)
-    w,m,p = signal.bode(s1,1000)
+    w,m,p = signal.bode(s1,10000)
     f, (ax1, ax2) = plt.subplots(2,1,sharex=True)
     ax1.grid()
     ax2.grid()

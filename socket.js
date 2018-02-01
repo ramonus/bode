@@ -37,5 +37,4 @@ io.on("connect",function(socket){
 		py.stdin.end();
 	});
 });
-
 module.exports = socketApi;
