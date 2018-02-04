@@ -2,11 +2,7 @@
 
 # -*- coding: utf-8 -*-
 
-"""
-Create bode diagrams
-"""
-
-import sys, json, os
+import sys,json,os
 from scipy import signal
 import matplotlib.pyplot as plt
 
@@ -17,34 +13,27 @@ def read_in():
   return json.loads(lines[0])
 
 def what_name(sid):
+  name = lambda i,n: DP+f'{i}/nyquist{n}.png'
   n = 1
-  name = lambda i,n: DP+f'{i}/bode{n}.png'
   while os.path.exists(name(sid,n)):
     n+=1
   return name(sid,n)
+
 def main():
   try:
     data = read_in()
-    i = data['id']
-    n = data["n"]
-    d = data["d"]
+    i,n,d = data["id"],data["n"],data["d"]
     if not os.path.exists(DP+i):
       os.makedirs(DP+i)
     s1 = signal.lti(n,d)
-    w,m,p = signal.bode(s1,10000)
-    f, (ax1, ax2) = plt.subplots(2,1,sharex=True)
+    w,H = s1.freqresp()
+    f, ax1 = plt.subplots()
+    f.suptitle("Nyquist plot")
     ax1.grid()
-    ax2.grid()
-    ax1.set_title("Gain")
-    ax2.set_title("Phase")
-    ax2.set_xlabel("log(w)")
-    ax1.set_ylabel("Gain")
-    ax2.set_ylabel("Phase")
-    
-    ax1.semilogx(w,m)
-    ax2.semilogx(w,p)
-    
-    f.suptitle("Bode plot")
+    ax1.set_xlabel("Real(G)")
+    ax1.set_ylabel("Imag(G)")
+    ax1.plot(H.real,H.imag,"b")
+    ax1.plot(H.real,-H.imag,"--r")
     na = what_name(i)
     f.savefig(na,dpi=300)
     print(na.split("/")[-1],end="")
@@ -53,5 +42,6 @@ def main():
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     print(exc_type, fname, exc_tb.tb_lineno)
+    
 if __name__=="__main__":
   main()
