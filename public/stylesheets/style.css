@@ -34,6 +34,7 @@ input{
 	border: 1px solid gray;
 }
 #go{
+	cursor:pointer;
 	width:100%;
 	background-color:rgba(0,93,255,0.5);
 	border: none;
